@@ -1,7 +1,8 @@
 import ttypes as types
 import wpwithin
 import time
-
+import signal
+import sys
 
 out = wpwithin.createClient("127.0.0.1", 9090, True)
 
@@ -16,12 +17,16 @@ service = types.Service(id=1, name="RoboWash", description="Car washed by robot"
 
 client.addService(service)
 
-client.initProducer(merchantClientKey="A_P_03eaa1d3-4642-4079-b030-b543ee04b5af", merchantServiceKey="A_P_f50ecb46-ca82-44a7-9c40-421818af5996")
-
+client.initProducer(merchantClientKey="T_C_6a38539b-89d0-4db9-bec3-d825779c1809", merchantServiceKey="T_S_6b0f27d5-3787-4304-a596-01160c49a55d")
 print("Start service broadcast")
-client.startServiceBroadcast(200000)
+client.startServiceBroadcast(0)
 
-time.sleep(300)
+def signal_handler(signal, frame):
+    print("shutting down...")
+    agent.kill()
+    sys.exit(0)
 
-print("shutting down...")
-agent.kill()
+signal.signal(signal.SIGINT, signal_handler)
+
+while True:
+   pass

@@ -62,7 +62,7 @@ class WPWithin(object):
 
     def stopServiceBroadcast(self):
         try:
-            self.thriftClient.stopServiceBroadcast
+            self.thriftClient.stopServiceBroadcast()
         except wpt.Error as err:
             raise Error(err.message)
 
@@ -99,9 +99,9 @@ class WPWithin(object):
                 wprices.append(ConvertFromThriftPrice(val))
             return wprices
 
-    def selectServices(self, serviceId, numberOfUnits, priceId):
+    def selectService(self, serviceId, numberOfUnits, priceId):
         try:
-            service = self.thriftClient.selectServices(serviceId, numberOfUnits, priceId)
+            service = self.thriftClient.selectService(serviceId, numberOfUnits, priceId)
         except wpt.Error as err:
             raise Error(err.message)
         else:

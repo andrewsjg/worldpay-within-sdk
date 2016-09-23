@@ -2,13 +2,14 @@ import ttypes as types
 
 
 class SampleConsumer:
-    def __init__(self, client, hceCard):
+    def __init__(self, client, agent, hceCard):
         self.client = client
+        self.agent = agent
         self.hceCard = hceCard
 
     def getDeviceDetails(self):
         try:
-            serviceMessages = self.client.deviceDiscovery(100000)
+            serviceMessages = self.client.deviceDiscovery(8000)
         except types.Error as err:
             print("deviceDiscovery.callback.err: " + err.message)
             raise err
@@ -49,11 +50,11 @@ class SampleConsumer:
         except types.Error as err:
             print("requestServices.callback.err: " + err.message)
             raise err
-        if len(serviceDetails) == 0:
+        if len(serviceDetails) > 0:
             service = serviceDetails[0]
             print("Services:")
-            print("Id: " + service.serviceId)
-            print("Description: " + service.serviceDescription)
+            print("Id: {0}".format(service.serviceId))
+            print("Description: {0}".format(service.serviceDescription))
             print("----------")
             return service.serviceId
             
@@ -109,7 +110,7 @@ class SampleConsumer:
 
         serviceId = self.getAvailableServices()
 
-        priceId = self.getServicePrices(serviceId)
+        priceId = self.getServicePrices(serviceId).id
 
         priceResponse = self.getServicePriceQuote(serviceId, numberOfUnits, priceId)
 
@@ -129,13 +130,12 @@ class SampleConsumer:
         Total Paid: {0.totalPaid}
         Service Delivery Token:
         \tKey: {1.key}
-        \tIssued: {1.issues}
+        \tIssued: {1.issued}
         \tExpiry: {1.expiry}
         \tRefund on expiry: {1.refundOnExpiry}
-        \tSignature: {1.signature}
-        Client UUID: {0.clientUUID}""".format(response, response.serviceDeliveryToken)
+        \tSignature: {1.signature}""".format(response, response.serviceDeliveryToken)
 
         print(printMessage)
 
         print("Shutting down...")
-        self.client.proc.kill()
+        self.agent.kill()

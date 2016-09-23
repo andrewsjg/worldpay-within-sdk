@@ -1,26 +1,32 @@
 from consumer import SampleConsumer
 import ttypes as types
-import wpwithign
+import wpwithin
 
-hceCard = types.HCECard(firstName='Samwise', lastName='Gamgee', expMonth=1, expYear=2018, cardNumber='3791421199999999', cardType='Card', cvc='865')
+hceCard = types.HCECard(firstName='Bilbo', lastName='Baggins', expMonth=11, expYear=2018, cardNumber='5555555555554444', cardType='Card', cvc='113')
 
-out = wpwithin.createClient("127.0.0.1", 9091, True)
+out = wpwithin.createClient("127.0.0.1", 8778, True)
 
 client = out['client']
 agent = out['rpc']
 
-consumer = SampleConsumer(client, hceCard)
+consumer = SampleConsumer(client, agent, hceCard)
 
-consumer.client.setup("Python3-Device", "Sample Python3 consumer device")
+consumer.client.setup("Python3 test consumer", "Python3 sample consumer device")
 
-print("Finding devices...")
+print("Finding myself...")
 
 device = consumer.client.getDevice()
 if device is None:
     print("No devices found")
 
 else:
-    print("Successfully got a device")
+    print("Successfully found itself:")
+    a = """uid: {0.uid}
+name: {0.name}
+description: {0.description}
+ipv4: {0.ipv4Address}"""
+    print(a.format(device, device.services))
+
     print("Getting device details...")
     
     serviceMessage = consumer.getDeviceDetails()
