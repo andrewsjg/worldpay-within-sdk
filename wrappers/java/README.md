@@ -7,7 +7,7 @@
 
 ## Running the test apps
 
-[There is lot's of detail here on running the RPC Agent, or the Client app with the Java example programs](https://github.com/WPTechInnovation/worldpay-within-sdk/tree/develop/applications/dev-client)
+[There is lot's of detail here on running the RPC Agent, or the Client app with the Java example programs](https://github.com/wptechinnovation/worldpay-within-sdk/tree/develop/applications/dev-client)
 
 [There's also further information here on orchestrating multiple applications in Java or Node.js](http://wptechinnovation.github.io/worldpay-within-sdk/getting-started.html)
 

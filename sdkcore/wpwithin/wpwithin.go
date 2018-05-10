@@ -15,7 +15,7 @@ import (
 	"github.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin/utils"
 	"github.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin/utils/wslog"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 )
 
 // Factory to allow easy creation of
@@ -40,7 +40,7 @@ type WPWithin interface {
 	SetEventHandler(handler event.Handler) error
 }
 
-// Initialise Initialise the SDK - Returns an implementation of WPWithin
+// Initialise the SDK - Returns an implementation of WPWithin
 // Must provide a device name and description
 func Initialise(name, description string) (WPWithin, error) {
 

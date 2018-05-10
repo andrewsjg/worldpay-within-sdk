@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/gorilla/mux"
+	log "github.com/sirupsen/logrus"
 	"github.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin/psp"
 	"github.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin/types"
 	"github.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin/types/event"
